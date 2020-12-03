@@ -13,7 +13,7 @@ module.exports = {
         return res.render("detail", { ...req.query });
     },
     callback: (req, res) => {
-        
+        console.log(req.query);
         switch(req.query.status[0]){
             case 'success':
                 return res.render('success');
