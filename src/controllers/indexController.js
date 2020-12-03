@@ -16,7 +16,11 @@ module.exports = {
         console.log(req.query);
         switch(req.query.status[0]){
             case 'success':
-                return res.render('success');
+                return res.render('success', {
+                    payment_type: req.query.payment_type,
+                    external_reference: req.query.external_reference,
+                    collection_id: req.query.collection_id
+                });
             case 'pending':
                 return res.render('pending');
             case 'failure':
