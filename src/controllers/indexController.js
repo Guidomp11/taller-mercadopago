@@ -12,17 +12,47 @@ module.exports = {
     detail: (req, res) => {
         return res.render("detail", { ...req.query });
     },
+    callback: (req, res) => {
+        console.log(req.query);
+        switch(req.query.status[0]){
+            case 'success':
+                return res.render('success');
+            case 'pending':
+                return res.render('pending');
+            case 'failure':
+                return res.render('failure');
+            default:
+                return res.status(404).end()
+        }
+    },
+    notifications: (req, res) => {
+        res.status(200).end('ok');
+    },
     comprar: (req, res) => {
+        const host = 'http://localhost:3000/';
+        const url = host+'callback?status=';
+        
+
         let item = {
-            id: 1,
+            id: 1234,
             picture_url: 'https://mercado-pago-certificado.herokuapp.com/images/products/jordan.jpg',
             title: 'Titulo del Producto',
-            description: 'Esta es la descripcion',
-            unit_price: 100,
+            description: 'Dispositivo móvil de Tienda e-commerce',
+            unit_price: 999,
             quantity: 1
         }
 
         let preference = {
+            back_urls:{
+                success: url+'success',
+                pending: url+'pending',
+                failure: url+'failure'
+            },
+
+            notification_url: host+'notifications',
+
+            auto_return: 'approved',
+
             payer: { //informacion del que paga
                 name: 'Ryan',
                 surname: 'Dahl',
