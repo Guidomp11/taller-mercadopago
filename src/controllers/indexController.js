@@ -13,7 +13,7 @@ module.exports = {
         return res.render("detail", { ...req.query });
     },
     callback: (req, res) => {
-        console.log(req.query);
+        
         switch(req.query.status[0]){
             case 'success':
                 return res.render('success');
@@ -26,7 +26,8 @@ module.exports = {
         }
     },
     notifications: (req, res) => {
-        res.status(200).end('ok');
+        console.log('webhook', req.body);
+        res.status(200).send(req.body);
     },
     comprar: (req, res) => {
         const host = 'https://mercado-pago-certificado.herokuapp.com/';

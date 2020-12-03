@@ -16,6 +16,6 @@ router.post('/comprar', indexController.comprar);
 /*REDIRECCION PARA MERCADO PAGO*/
 router.get('/callback', indexController.callback);
 
-router.get('/notifications', indexController.notifications);
+router.post('/notifications', indexController.notifications);
 
 module.exports = router;
